@@ -1,0 +1,64 @@
+{% load mptt_tags %}
+{% load bootstrap4 %}
+{% load static %}
+{% load blog_tags %}
+
+<hr class="hr-horizontal-gradient">
+{% if not comments %}
+<div class="pt-1 pb-1">
+    Коментарів ще немає.
+</div>
+{% else %}
+<div class="p-1">
+    Коментарів ({{ comments.count }})
+</div>
+{% endif %}
+<ul class="list-group ">
+    {% recursetree comments %}
+    <li class="list-group-item">
+        <div class="text-muted">
+            {{ node.author }} | {{ node.published }}</div>
+        {% if node.deleted %}
+        <div class="text-justify pt-2 mt-2 text-warning">Коментар видалено.</div>
+        {% else %}
+        <div class="text-justify pt-2 mt-2">{{ node.content|linebreaks }}</div>
+        <div>
+            {% if context.user.is_authenticated %}
+            <a href="{{ context.post.get_absolute_url }}?mark=like_comment-{{node.id}}">
+                <img src="{% static 'img/hand-thumbs-up.svg' %}" alt="" width="16" height="16" title="hand-thumbs-up"></a>
+            <span id="ajax_{{node.id}}"> {{ node.likes.likes }}</span>
+            <a href="{{ context.post.get_absolute_url }}?mark=dislike_comment-{{node.id}}">
+                <img src="{% static 'img/hand-thumbs-down.svg' %}" alt="" width="16" height="16" title="hand-thumbs-down"></a>
+            <span class="text-danger" id="ajax__{{node.id}}"> {{ node.likes.dislikes }}</span>
+            <a href="{{ context.post.get_absolute_url }}?mark=remove_mark_comment-{{node.id}}">
+                <img src="{% static 'img/trash.svg' %}" alt="" width="16" height="16" title="trash"></a>
+            {% else %}
+            <a href="#a" class="btn btn-default btn-sm" data-toggle="tooltip" title="Ставити оцінку можуть лише зареєстровані користувачі.">
+                <img  src="{% static 'img/hand-thumbs-up.svg' %}"  alt="" width="16" height="16" title="hand-thumbs-up">
+                <span id="ajax_1{{node.id}}"> {{ node.likes.likes }}</span>
+                <img src="{% static 'img/hand-thumbs-down.svg' %}" alt="" width="16" height="16" title="hand-thumbs-down">
+                <span class="text-danger" id="ajax__1{{node.id}}"> {{ node.likes.dislikes }}</span>
+            </a>
+            {% endif %}
+        </div>
+        <a class="new-comment"
+           href="{% url 'blog:comment_create' node.content_object.category.slug node.content_object.slug %}?parent={{ node.id }}">Відповісти</a>
+        {% endif %}
+        {% if not node.is_leaf_node %}
+        <ul class="list-group">
+            {{ children }}
+        </ul>
+        {% endif %}
+    </li>
+    {% endrecursetree %}
+</ul>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+$(document).ready(function(){
+    $('a').click(function(){
+         var parent =  $(this).attr('data-id');
+         $('#parent_id').val(parent);
+    });
+});
+</script>

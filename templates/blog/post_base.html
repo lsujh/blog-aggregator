@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load blog_tags %}
+{% load mptt_tags %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      <h1>My Blog</h1>
+    </div>
+    <div class="col-cm-9">
+      <form method="get">
+        <button type="submit" class="btn btn-sm btn-primary btn-raised mr-1">Сортуввати</button>
+        <input name="sort" type="checkbox" value="title"> по заголовку
+        <input name="sort" type="checkbox" value="publish"> по даті
+      </form>
+      {% if user.is_authenticated %}
+      <a href="{% url 'blog:post_new' %}">Додати статтю</a>
+      {% endif %}
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-3">
+      {% show_category_posts %}
+    </div>
+    <div class="col-sm-6">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          {% for crumb in breadcrumb %}
+          <li class="breadcrumb-item"> <a href="{{ crumb.get_absolute_url }}"> {{ crumb }} </a> </li>
+          {% endfor %}
+        </ol>
+      </nav>
+
+     <div>
+    <div class="col-sm-3">
+      {% show_latest_posts 3 %}
+      {% show_popular_posts 5 %}
+      <p class="list-group-item active">Найбільше коментують</p>
+      {% get_most_commented_posts as most_commented_posts %}
+      {% for post in most_commented_posts %}
+      <p>
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+      </p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

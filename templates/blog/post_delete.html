@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ post.title }}
+{% endblock title %}
+{% block content %}
+<div class="container">
+    <h1>Видалити статтю</h1>
+    <form action="" method="post">{% csrf_token %}
+      <p>Ви впевнені, що хочететв видалити статтю "{{ post.title }}"?</p>
+        <button class="btn btn-success" type="submit">Підтвердити</button>
+    </form>
+</div>
+{% endblock content %}

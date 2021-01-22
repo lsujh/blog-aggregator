@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Вийти{% endblock %}
+
+{% block content %}
+<h1>Вийти</h1>
+<p>Ви впевнені, що хочете вийти?</p>
+<form method="post" action="{% url 'account_logout' %}">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <button class="btn btn-danger" type="submit">Вийти</button>
+</form>
+{% endblock content %}

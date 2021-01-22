@@ -1,0 +1,6 @@
+<p class="list-group-item active">Останні публікації</p>
+{% for post in latest_posts %}
+  <p>
+    <a  href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+  </p>
+{% endfor %}
