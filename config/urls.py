@@ -20,7 +20,7 @@ urlpatterns = [
     path("ckeditor/", include("ckeditor_uploader.urls")),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap",),
     path("robots.txt", robots_txt),
-    path('pages/', include('django.contrib.flatpages.urls')),
+    path('', include('django.contrib.flatpages.urls')),
 ]
 
 if settings.DEBUG:
