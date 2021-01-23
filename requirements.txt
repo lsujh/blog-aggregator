@@ -6,6 +6,7 @@ certifi==2020.12.5
 cffi==1.14.4
 chardet==4.0.0
 colorama==0.4.3
+config==0.5.0.post0
 contextlib2==0.6.0
 cryptography==3.3.1
 DAWG-Python==0.7.2
@@ -42,6 +43,7 @@ PyJWT==2.0.1
 pymorphy2==0.9.1
 pymorphy2-dicts-ru==2.4.417127.4579844
 pyparsing==2.4.6
+python-decouple==3.4
 python3-openid==3.2.0
 pytils==0.3
 pytoml==0.1.21
