@@ -4,6 +4,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from pytils.translit import slugify
 
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.db import models, IntegrityError
@@ -79,8 +80,8 @@ class Post(ModelMeta, models.Model):
     publish = models.DateTimeField(verbose_name="Дата публікації", default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    keywords = ListField(verbose_name="Ключові слова", max_length=250,
-                         help_text='A comma-separated list of keywords.')
+    keywords = ArrayField(models.CharField(max_length=50), blank=True,
+                          verbose_name="Ключові слова", help_text='A comma-separated list of keywords.')
     author = models.ForeignKey(
         CustomUser, verbose_name="Автор", on_delete=models.CASCADE, related_name="post_author"
     )
@@ -107,14 +108,6 @@ class Post(ModelMeta, models.Model):
         )
 
     def save(self, *args, **kwargs):
-        self.keywords.append(self.title.split()[0].lower())
-        cat_name = (
-            Category.objects.get(name=self.category.name)
-            .get_ancestors(include_self=True)
-            .values_list("name", flat=True)
-        )
-        for name in cat_name:
-            self.keywords.append(name.lower())
         if not self.slug:
             self.slug = f"{timezone.now().year}-{timezone.now().month}-{timezone.now().day}-{slugify(self.title)}"
         try:
