@@ -6,8 +6,8 @@ from django.contrib.flatpages.models import FlatPage
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 
-CustomUser = get_user_model()
 
+CustomUser = get_user_model()
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
@@ -28,7 +28,6 @@ class FlatPageAdmin(FlatPageAdmin):
             ),
         }),
     )
-
 
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, FlatPageAdmin)
