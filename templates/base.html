@@ -27,6 +27,7 @@
     <a class="p-1 text-dark" href="{% url 'blog:post_list' %}">Статті</a>
     <a class="p-1 text-dark" href="{% url 'contact:contact_create' %}">Зворотній зв'язок</a>
     {% if user.is_authenticated %}
+    <a class="p-1 text-dark" href="{% url 'account_email' %}">Change E-mail</a>
     <a class="p-1 text-dark" href="{% url 'account_logout' %}">Вийти</a>
     {% else %}
     <a class="p-1 text-dark" href="{% url 'account_login' %}">Вхід</a>

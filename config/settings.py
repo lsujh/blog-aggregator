@@ -26,6 +26,13 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.instagram',
+    # 'allauth.socialaccount.providers.linkedin',
+    # 'allauth.socialaccount.providers.twitter',
+    # 'allauth.socialaccount.providers.vk',
+    # 'allauth.socialaccount.providers.openid',
     'crispy_forms',
     "bootstrap4",
     "mptt",
@@ -75,6 +82,11 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # DATABASES = {
@@ -109,12 +121,72 @@ EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool, default=False)
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-AUTHENTICATION_BACKENDS = (
-    "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
-)
-
 SITE_ID = 1
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#          'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'online',
+#         },
+#         'APP': {
+#             'client_id': '123',
+#             'secret': '456',
+#             'key': ''
+#         }
+#     },
+#     'facebook': {
+#         'METHOD': 'oauth2',
+#         'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+#         'SCOPE': ['email', 'public_profile'],
+#         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+#         'INIT_PARAMS': {'cookie': True},
+#         'FIELDS': [
+#             'id',
+#             'first_name',
+#             'last_name',
+#             'middle_name',
+#             'name',
+#             'name_format',
+#             'picture',
+#             'short_name'
+#         ],
+#         'EXCHANGE_TOKEN': True,
+#         'LOCALE_FUNC': 'path.to.callable',
+#         'VERIFIED_EMAIL': False,
+#         'VERSION': 'v7.0',
+#     },
+#     'linkedin': {
+#         'SCOPE': [
+#             'r_basicprofile',
+#             'r_emailaddress'
+#         ],
+#         'PROFILE_FIELDS': [
+#             'id',
+#             'first-name',
+#             'last-name',
+#             'email-address',
+#             'picture-url',
+#             'public-profile-url',
+#         ]
+#     },
+#
+# }
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
