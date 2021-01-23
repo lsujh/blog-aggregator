@@ -5,6 +5,8 @@
 
 {% block content %}
 <div class="container-fluid">
+   <div class="row">
+    <div class="col-sm-4 offset-4">
 <h1>Вийти</h1>
 <p>Ви впевнені, що хочете вийти?</p>
 <form method="post" action="{% url 'account_logout' %}">
@@ -12,5 +14,7 @@
   {{ form|crispy }}
   <button class="btn btn-danger" type="submit">Вийти</button>
 </form>
+</div>
+   </div>
 </div>
 {% endblock content %}

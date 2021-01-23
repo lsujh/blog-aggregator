@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_GET
 from django.http import HttpResponse
+from django.contrib import messages
 
 from .models import Post, Category, PostStatistic, Tag
 from .forms import EmailPostForm
@@ -78,6 +79,7 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
         form.instance.published = False
         self.success_url = reverse_lazy('blog:post_list')
         form.save()
+        messages.success(self.request, 'Стаття успішно додана і відправлена на модерацію.')
         return super(BlogCreateView, self).form_valid(form)
 
 
@@ -85,6 +87,10 @@ class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     template_name = 'blog/post_edit.html'
     fields = ['title', 'description', 'body', 'keywords', 'tags']
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Стаття успішно оновлена.')
+        return super(BlogUpdateView, self).form_valid(form)
 
 
 class BlogDeleteView(LoginRequiredMixin, DeleteView):

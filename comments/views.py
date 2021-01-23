@@ -1,5 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 from django.views.generic.edit import CreateView
+from django.contrib import messages
 
 from badwordfilter.views import PymorphyProc, RegexpProc
 from .forms import CommentForm
@@ -37,4 +38,5 @@ class CommentCreate(CreateView):
         form.instance.content = content
         self.success_url = post.get_absolute_url()
         form.save()
+        messages.success(self.request, 'Коментар успішно додано.')
         return super(CommentCreate, self).form_valid(form)
