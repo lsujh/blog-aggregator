@@ -66,6 +66,7 @@ class BlogDetailView(DetailView):
         context['similar_posts'] = similar_posts.annotate(same_tags=Count("tags")).order_by(
             "-same_tags", "-publish"
         )[:4]
+        context['meta'] = self.get_object().as_meta(self.request)
         return context
 
 

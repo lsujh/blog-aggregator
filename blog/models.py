@@ -123,8 +123,6 @@ class Post(ModelMeta, models.Model):
         "title": "title",
         "description": "description",
         "keywords": "keywords",
-        'publisher': 'author',
-        'author': 'author',
     }
 
     def get_bookmark_count(self):
