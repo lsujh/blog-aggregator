@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django.contrib.postgres',
+    'django.contrib.sitemaps',
 
     'allauth',
     'allauth.account',

@@ -19,8 +19,8 @@ urlpatterns = [
     path('post/', include('blog.urls', namespace='blog')),
     path("ckeditor/", include("ckeditor_uploader.urls")),
     path('contact/', include('contact.urls', namespace='contact')),
-    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap",),
-    path("robots.txt", robots_txt),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap',),
+    path('robots.txt', robots_txt),
     path('', include('django.contrib.flatpages.urls')),
 ]
 
