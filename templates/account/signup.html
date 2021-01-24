@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load socialaccount %}
+{% providers_media_js %}
 
 {% block title %}Реєстрація{% endblock title %}
 
@@ -13,6 +15,9 @@
   {{ form|crispy }}
   <button class="btn btn-success" type="submit">Реєстрація</button>
 </form>
+        <p>Або Ви можете ввійти за допомогою: <br>
+<a href="{% provider_login_url 'google' %}">Google</a>
+      </p>
 </div>
    </div>
 </div>

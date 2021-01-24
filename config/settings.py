@@ -97,12 +97,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # }
 DATABASES = {
     "default": {
-        "ENGINE": config("ENGINE", default="django.db.backends.sqlite3"),
-        "NAME": config("NAME", default="db.sqlite3"),
-        "USER": config("USER", default=None),
-        "PASSWORD": config("PASSWORD", default=None),
-        "HOST": config("HOST", default=None),
-        "PORT": config("PORT", cast=int, default=0),
+        "ENGINE": 'django.db.backends.postgresql_psycopg2',
+        "NAME": "ihor",
+        "USER": "ihor",
+        "PASSWORD": "ihor",
+        "HOST": "localhost",
+        "PORT": 5432,
     }
 }
 
@@ -224,8 +224,8 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
-STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
+# STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
+STATIC_ROOT = str(BASE_DIR.joinpath('static'))
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",

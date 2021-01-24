@@ -37,7 +37,12 @@
             {% endautoescape %}
             <hr>
             <p class="date text-muted">
-                Опубліковано <span class="font-italic">{{ post.publish }}</span>, автор <span class="font-italic">{{ post.author.full_name }}</span>
+                Опубліковано <span class="font-italic">{{ post.publish }}</span>,
+                {% if post.source %}
+                <br>джерело: <span class="font-italic">{{ post.source }}</span>
+                {% else %}
+                автор <span class="font-italic">{{ post.author.full_name }}</span>
+                {% endif %}
             </p>
 
             <div>

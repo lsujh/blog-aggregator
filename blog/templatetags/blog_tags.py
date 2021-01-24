@@ -50,7 +50,8 @@ def get_most_commented_posts(count=5):
 
 @register.simple_tag
 def get_views_post(pk):
-    return PostStatistic.objects.filter(post=pk).aggregate(Sum("views"))['views__sum']
+    views = PostStatistic.objects.filter(post=pk).aggregate(Sum("views"))['views__sum']
+    return views if views else 0
 
 
 @register.filter(name="markdown")

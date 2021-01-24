@@ -72,7 +72,7 @@ class BlogDetailView(DetailView):
 class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'blog/post_new.html'
-    fields = ['category', 'title', 'description', 'body', 'keywords', 'tags']
+    fields = ['category', 'title', 'description', 'body', 'keywords', 'tags', 'source']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -86,7 +86,7 @@ class BlogCreateView(LoginRequiredMixin, CreateView):
 class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     template_name = 'blog/post_edit.html'
-    fields = ['title', 'description', 'body', 'keywords', 'tags']
+    fields = ['title', 'description', 'body', 'keywords', 'tags', 'source']
 
     def form_valid(self, form):
         messages.success(self.request, 'Стаття успішно оновлена.')

@@ -88,6 +88,7 @@ class Post(ModelMeta, models.Model):
     comments = GenericRelation(Comment, related_query_name="post_comment")
     likes = GenericRelation(LikeDislike, related_query_name='post_likes')
     tags = models.ManyToManyField(Tag, verbose_name="Тег", blank=True)
+    source = models.CharField('Джерело', max_length=100, blank=True)
 
     objects = models.Manager()
     published = PublishedManager()
