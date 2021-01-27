@@ -12,10 +12,10 @@ from django.utils import timezone
 
 from comments.models import Comment
 from likes.models import LikeDislike
-from config.fields import ListField
 from .managers import PublishedManager
 
 CustomUser = get_user_model()
+
 
 class Tag(models.Model):
     name = models.CharField("Тег", max_length=50, unique=True, null=True)
@@ -27,6 +27,7 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Category(MPTTModel):
     parent = TreeForeignKey(
@@ -40,7 +41,7 @@ class Category(MPTTModel):
     name = models.CharField("Назва", db_index=True, max_length=200)
     description = models.TextField(verbose_name="Опис", blank=True, null=True)
     slug = models.SlugField(max_length=200, db_index=True, unique=True)
-    published = models.BooleanField('Опубліковано', default=True)
+    published = models.BooleanField("Опубліковано", default=True)
 
     class MPTTMeta:
         verbose_name = "Категорія"
@@ -51,7 +52,10 @@ class Category(MPTTModel):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("blog:post_list", args=[self.slug],)
+        return reverse(
+            "blog:post_list",
+            args=[self.slug],
+        )
 
     @property
     def items_count(self):
@@ -80,15 +84,22 @@ class Post(ModelMeta, models.Model):
     publish = models.DateTimeField(verbose_name="Дата публікації", default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    keywords = ArrayField(models.CharField(max_length=50), blank=True,
-                          verbose_name="Ключові слова", help_text='A comma-separated list of keywords.')
+    keywords = ArrayField(
+        models.CharField(max_length=50),
+        blank=True,
+        verbose_name="Ключові слова",
+        help_text="A comma-separated list of keywords.",
+    )
     author = models.ForeignKey(
-        CustomUser, verbose_name="Автор", on_delete=models.CASCADE, related_name="post_author"
+        CustomUser,
+        verbose_name="Автор",
+        on_delete=models.CASCADE,
+        related_name="post_author",
     )
     comments = GenericRelation(Comment, related_query_name="post_comment")
-    likes = GenericRelation(LikeDislike, related_query_name='post_likes')
+    likes = GenericRelation(LikeDislike, related_query_name="post_likes")
     tags = models.ManyToManyField(Tag, verbose_name="Тег", blank=True)
-    source = models.CharField('Джерело', max_length=100, blank=True)
+    source = models.CharField("Джерело", max_length=100, blank=True)
 
     objects = models.Manager()
     published = PublishedManager()
@@ -105,7 +116,10 @@ class Post(ModelMeta, models.Model):
     def get_absolute_url(self):
         return reverse(
             "blog:post_detail",
-            args=[self.category.slug, self.slug,],
+            args=[
+                self.category.slug,
+                self.slug,
+            ],
         )
 
     def save(self, *args, **kwargs):
@@ -114,10 +128,11 @@ class Post(ModelMeta, models.Model):
         try:
             super(self.__class__, self).save(*args, **kwargs)
         except IntegrityError:
-            self.slug = f"{timezone.now().year}-{timezone.now().month}-{timezone.now().day}-{timezone.now().hour}-" \
-                        f"{timezone.now().minute}-{slugify(self.title)}"
+            self.slug = (
+                f"{timezone.now().year}-{timezone.now().month}-{timezone.now().day}-{timezone.now().hour}-"
+                f"{timezone.now().minute}-{slugify(self.title)}"
+            )
             super(self.__class__, self).save(*args, **kwargs)
-
 
     _metadata = {
         "title": "title",
@@ -130,7 +145,7 @@ class Post(ModelMeta, models.Model):
 
 
 class PostStatistic(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_views')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_views")
     date = models.DateField("Дата", default=timezone.now)
     views = models.IntegerField("Перегляди", default=0)
 

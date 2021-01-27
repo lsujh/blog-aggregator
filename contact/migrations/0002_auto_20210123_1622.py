@@ -6,22 +6,27 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contact', '0001_initial'),
+        ("contact", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='contact',
-            options={'verbose_name': "Зворотній зв'язок", 'verbose_name_plural': "Зворотній зв'язок"},
+            name="contact",
+            options={
+                "verbose_name": "Зворотній зв'язок",
+                "verbose_name_plural": "Зворотній зв'язок",
+            },
         ),
         migrations.AlterField(
-            model_name='contact',
-            name='files',
-            field=models.FileField(blank=True, upload_to='upload/', verbose_name='Файл'),
+            model_name="contact",
+            name="files",
+            field=models.FileField(
+                blank=True, upload_to="upload/", verbose_name="Файл"
+            ),
         ),
         migrations.AlterField(
-            model_name='contact',
-            name='message',
-            field=models.TextField(verbose_name='Повідомлення'),
+            model_name="contact",
+            name="message",
+            field=models.TextField(verbose_name="Повідомлення"),
         ),
     ]

@@ -1,0 +1,18 @@
+{% load bootstrap4 %}
+{% load static %}
+{% load mptt_tags %}
+{% load blog_tags %}
+
+<h3>Категорії</h3>
+<ul>
+    <li>
+        <a href="{% url 'aggregator:aggregate' %}">Всі категорії</a>
+    </li>
+</ul>
+<ul>
+    {% for category in categories %}
+    {% if category.category %}
+    <li> <a href="{% url 'aggregator:aggregate' %}?category={{category.category}}">{{ category.category|title }}</a></li>
+    {% endif %}
+    {% endfor %}
+</ul>

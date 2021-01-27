@@ -8,11 +8,17 @@ from .managers import LikeDislikeManager
 
 CustomUser = get_user_model()
 
+
 class LikeDislike(models.Model):
-    vote = models.SmallIntegerField(verbose_name='Голос')
-    user = models.ForeignKey(CustomUser, verbose_name='Користувач', related_name='likes', on_delete=models.CASCADE)
+    vote = models.SmallIntegerField(verbose_name="Голос")
+    user = models.ForeignKey(
+        CustomUser,
+        verbose_name="Користувач",
+        related_name="likes",
+        on_delete=models.CASCADE,
+    )
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey("content_type", "object_id")
 
     objects = LikeDislikeManager()

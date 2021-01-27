@@ -27,6 +27,7 @@ class PostAdmin(admin.ModelAdmin):
     date_hierarchy = "publish"
     ordering = ("status", "publish")
 
+
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}

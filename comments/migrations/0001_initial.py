@@ -10,31 +10,59 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('contenttypes', '0002_remove_content_type_name'),
+        ("contenttypes", "0002_remove_content_type_name"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Comment',
+            name="Comment",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('author', models.CharField(max_length=50, verbose_name='Автор')),
-                ('email', models.EmailField(max_length=254, verbose_name='Email')),
-                ('content', models.TextField(verbose_name='Повідомлення')),
-                ('published', models.DateTimeField(auto_now_add=True, verbose_name='Дата публікації')),
-                ('active', models.BooleanField(default=True)),
-                ('deleted', models.BooleanField(default=False)),
-                ('object_id', models.PositiveIntegerField()),
-                ('lft', models.PositiveIntegerField(editable=False)),
-                ('rght', models.PositiveIntegerField(editable=False)),
-                ('tree_id', models.PositiveIntegerField(db_index=True, editable=False)),
-                ('level', models.PositiveIntegerField(editable=False)),
-                ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='contenttypes.contenttype')),
-                ('parent', mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='comments.comment')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("author", models.CharField(max_length=50, verbose_name="Автор")),
+                ("email", models.EmailField(max_length=254, verbose_name="Email")),
+                ("content", models.TextField(verbose_name="Повідомлення")),
+                (
+                    "published",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Дата публікації"
+                    ),
+                ),
+                ("active", models.BooleanField(default=True)),
+                ("deleted", models.BooleanField(default=False)),
+                ("object_id", models.PositiveIntegerField()),
+                ("lft", models.PositiveIntegerField(editable=False)),
+                ("rght", models.PositiveIntegerField(editable=False)),
+                ("tree_id", models.PositiveIntegerField(db_index=True, editable=False)),
+                ("level", models.PositiveIntegerField(editable=False)),
+                (
+                    "content_type",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="contenttypes.contenttype",
+                    ),
+                ),
+                (
+                    "parent",
+                    mptt.fields.TreeForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="children",
+                        to="comments.comment",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Коментар',
-                'verbose_name_plural': 'Коментарі',
+                "verbose_name": "Коментар",
+                "verbose_name_plural": "Коментарі",
             },
         ),
     ]

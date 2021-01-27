@@ -10,20 +10,28 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('bookmark', '0001_initial'),
+        ("bookmark", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('comments', '0001_initial'),
+        ("comments", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='bookmarkcomment',
-            name='obj',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='comments.comment', verbose_name='Коментар'),
+            model_name="bookmarkcomment",
+            name="obj",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to="comments.comment",
+                verbose_name="Коментар",
+            ),
         ),
         migrations.AddField(
-            model_name='bookmarkcomment',
-            name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Користувач'),
+            model_name="bookmarkcomment",
+            name="user",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Користувач",
+            ),
         ),
     ]

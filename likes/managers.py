@@ -12,7 +12,11 @@ class LikeDislikeManager(models.Manager):
         return self.get_queryset().filter(vote__lt=0).count()
 
     def sum_rating(self):
-        return self.get_queryset().aggregate(Sum('vote')).get('vote__sum') or 0
+        return self.get_queryset().aggregate(Sum("vote")).get("vote__sum") or 0
 
     def comments(self):
-        return self.get_queryset().filter(content_type__model='comment').order_by('-comments__published')
+        return (
+            self.get_queryset()
+            .filter(content_type__model="comment")
+            .order_by("-comments__published")
+        )

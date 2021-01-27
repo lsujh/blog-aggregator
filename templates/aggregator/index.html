@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% load blog_tags %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            {% show_category_news %}
+        </div>
+        <div class="col-sm-6">
+            {% for a in articles %}
+            <div>
+                <div><h5><a href="{{ a.link }}">{{ a.title }}</a></h5></div>
+                <div>{{ a.description|truncatewords:30 }}</div>
+                <div><span class="font-italic text-muted">Джерело:</span> {{ a.source }} |
+                <span class="font-italic text-muted">Опубліковано:</span> {{ a.published }}</div><hr></div>
+            {% endfor %}
+            {% bootstrap_pagination page_obj pages_to_show=4 %}
+        </div>
+         <div class="col-sm-3">
+            {% show_sources %}
+        </div>
+    </div>
+</div>
+{% endblock %}

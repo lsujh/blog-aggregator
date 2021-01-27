@@ -9,10 +9,10 @@ class Slang(models.Model):
     morph = None
 
     word = models.CharField(
-        verbose_name = 'Нормальная форма матерного слова',
-        max_length = 64,
-        unique = True,
-        help_text = 'Можете вписать любое слово - оно будет нормализовано автоматически'
+        verbose_name="Нормальная форма матерного слова",
+        max_length=64,
+        unique=True,
+        help_text="Можете вписать любое слово - оно будет нормализовано автоматически",
     )
 
     def __unicode__(self):
@@ -29,5 +29,5 @@ class Slang(models.Model):
         super(Slang, self).save(*args, **kwargs)
 
     class Meta:
-        verbose_name = 'Матерное слово'
-        verbose_name_plural = 'Матерные слова'
+        verbose_name = "Матерное слово"
+        verbose_name_plural = "Матерные слова"

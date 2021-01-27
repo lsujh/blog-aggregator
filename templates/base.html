@@ -1,6 +1,8 @@
 {% load flatpages %}
 {% load static %}
 {% load meta %}
+{% load blog_tags %}
+{% load bootstrap4 %}
 
 <!DOCTYPE html>
 <html lang="uk">
@@ -28,6 +30,7 @@
     <a class="p-1 text-dark" href="{{ page.url }}">{{ page.title }}</a>
     {% endfor %}
     <a class="p-1 text-dark" href="{% url 'blog:post_list' %}">Статті</a>
+    <a class="p-1 text-dark" href="{% url 'aggregator:aggregate' %}">Новини</a>
     <a class="p-1 text-dark" href="{% url 'contact:contact_create' %}">Зворотній зв'язок</a>
     {% if user.is_authenticated %}
     <a class="p-1 text-dark" href="{% url 'account_email' %}">Change E-mail</a>

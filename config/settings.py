@@ -10,31 +10,30 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY", default="very-secret-key")
 DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'blog-agregator.herokuapp.com']
+ALLOWED_HOSTS = ["0.0.0.0", "localhost", "127.0.0.1", "blog-agregator.herokuapp.com"]
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'django.contrib.flatpages',
-    'django.contrib.postgres',
-    'django.contrib.sitemaps',
-
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django.contrib.sites",
+    "django.contrib.flatpages",
+    "django.contrib.postgres",
+    "django.contrib.sitemaps",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
     # 'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.google',
+    "allauth.socialaccount.providers.google",
     # 'allauth.socialaccount.providers.instagram',
     # 'allauth.socialaccount.providers.linkedin',
     # 'allauth.socialaccount.providers.twitter',
     # 'allauth.socialaccount.providers.vk',
     # 'allauth.socialaccount.providers.openid',
-    'crispy_forms',
+    "crispy_forms",
     "bootstrap4",
     "mptt",
     "easy_thumbnails",
@@ -42,42 +41,45 @@ INSTALLED_APPS = [
     "ckeditor",
     "ckeditor_uploader",
 
-    'accounts',
-    'blog',
-    'comments',
-    'likes',
-    'bookmark',
-    'badwordfilter',
-    'contact',
+    "accounts",
+    "blog",
+    "comments",
+    "likes",
+    "bookmark",
+    "badwordfilter",
+    "contact",
+    "aggregator",
 ]
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = "accounts.CustomUser"
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
 ]
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR.joinpath('templates'),],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+            BASE_DIR.joinpath("templates"),
+        ],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
@@ -88,7 +90,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = "config.wsgi.application"
 
 # DATABASES = {
 #     'default': {
@@ -98,7 +100,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # }
 DATABASES = {
     "default": {
-        "ENGINE": 'django.db.backends.postgresql_psycopg2',
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "ihor",
         "USER": "ihor",
         "PASSWORD": "ihor",
@@ -109,7 +111,7 @@ DATABASES = {
 
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 EMAIL_BACKEND = config(
     "EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
@@ -125,14 +127,14 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SITE_ID = 1
 
 SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
+    "google": {
+        "SCOPE": [
+            "profile",
+            "email",
         ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
     }
 }
 
@@ -193,30 +195,30 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_SESSION_REMEMBER = True
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_UNIQUE_EMAIL = True
 
-LOGIN_REDIRECT_URL = '/'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
-LANGUAGE_CODE = 'uk'
+LANGUAGE_CODE = "uk"
 
-TIME_ZONE = 'Europe/Kiev'
+TIME_ZONE = "Europe/Kiev"
 
 USE_I18N = True
 
@@ -224,23 +226,24 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 # STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
-STATIC_ROOT = str(BASE_DIR.joinpath('static'))
+STATIC_ROOT = str(BASE_DIR.joinpath("static"))
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
+MEDIA_ROOT = str(BASE_DIR.joinpath("media"))
 
-META_DEFAULT_KEYWORDS = [
+META_DEFAULT_KEYWORDS = []
+
+META_INCLUDE_KEYWORDS = [
+    "блог-агрегатор",
+    "про все",
 ]
-
-META_INCLUDE_KEYWORDS = ['блог-агрегатор', 'про все',
-  ]
 
 THUMBNAIL_ALIASES = {
     "": {
@@ -352,10 +355,25 @@ CKEDITOR_CONFIGS = {
 #         },
 #     },
 # }
+
 MESSAGE_TAGS = {
-    messages.DEBUG: 'alert-info',
-    messages.INFO: 'alert-info',
-    messages.SUCCESS: 'alert-success',
-    messages.WARNING: 'alert-warning',
-    messages.ERROR: 'alert-danger',
+    messages.DEBUG: "alert-info",
+    messages.INFO: "alert-info",
+    messages.SUCCESS: "alert-success",
+    messages.WARNING: "alert-warning",
+    messages.ERROR: "alert-danger",
 }
+
+CELERY_BROKER_URL = 'amqp://guest@localhost:5672//'
+# CELERY_RESULT_BACKEND = 'amqp://guest@localhost:5672//'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+CELERY_ENABLE_UTC = True
+
+BROKER_URL = os.environ.get("CLOUDAMQP_URL")
+BROKER_POOL_LIMIT = 1
+BROKER_CONNECTION_MAX_RETRIES = None
+
+

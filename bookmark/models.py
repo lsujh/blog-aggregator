@@ -7,21 +7,22 @@ from blog.models import Post
 
 CustomUser = get_user_model()
 
+
 class BookmarkBase(models.Model):
     class Meta:
         abstract = True
-    user = models.ForeignKey(CustomUser, verbose_name='Користувач', on_delete=models.CASCADE)
+
+    user = models.ForeignKey(
+        CustomUser, verbose_name="Користувач", on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return self.user.email
 
 
 class BookmarkPost(BookmarkBase):
-    obj = models.ForeignKey(Post, verbose_name='Стаття', on_delete=models.CASCADE )
+    obj = models.ForeignKey(Post, verbose_name="Стаття", on_delete=models.CASCADE)
 
 
 class BookmarkComment(BookmarkBase):
-    obj = models.ForeignKey(Comment, verbose_name='Коментар', on_delete=models.CASCADE)
-
-
-
+    obj = models.ForeignKey(Comment, verbose_name="Коментар", on_delete=models.CASCADE)

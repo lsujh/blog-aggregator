@@ -1,11 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load blog_tags %}
 
 {% block title %}{{ flatpage.title }}{% endblock title %}
 
 {% block content %}
 <div class="container-fluid">
+    <div class="row">
+    <div class="col-sm-3">
+            {% show_category_news %}
+        </div>
+        <div class="col-sm-6">
 <h1>{{ flatpage.title }}</h1>
 <p>{{ flatpage.content }}</p>
+</div>
+        <div class="col-sm-3">
+            {% show_sources %}
+        </div>
+    </div>
 </div>
 {% endblock content %}

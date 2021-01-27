@@ -6,18 +6,40 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0001_initial'),
+        ("accounts", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='TemporaryBanIp',
+            name="TemporaryBanIp",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('ip_address', models.GenericIPAddressField(unique=True, verbose_name='IP адреса')),
-                ('attempts', models.IntegerField(default=0, verbose_name='Невдалих спроб')),
-                ('time_unblock', models.DateTimeField(blank=True, verbose_name='Час розблокування')),
-                ('status', models.BooleanField(default=False, verbose_name='Статус блокування')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "ip_address",
+                    models.GenericIPAddressField(unique=True, verbose_name="IP адреса"),
+                ),
+                (
+                    "attempts",
+                    models.IntegerField(default=0, verbose_name="Невдалих спроб"),
+                ),
+                (
+                    "time_unblock",
+                    models.DateTimeField(blank=True, verbose_name="Час розблокування"),
+                ),
+                (
+                    "status",
+                    models.BooleanField(
+                        default=False, verbose_name="Статус блокування"
+                    ),
+                ),
             ],
         ),
     ]

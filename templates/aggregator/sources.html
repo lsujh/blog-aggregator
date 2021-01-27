@@ -1,0 +1,16 @@
+{% load bootstrap4 %}
+{% load static %}
+{% load mptt_tags %}
+{% load blog_tags %}
+
+<h3>Джерела</h3>
+<ul>
+    <li>
+        <a href="{% url 'aggregator:aggregate' %}">Всі джерела</a>
+    </li>
+</ul>
+<ul>
+    {% for source in sources %}
+    <li> <a href="{% url 'aggregator:aggregate' %}?source={{source.source}}">{{ source.source }}</a></li>
+    {% endfor %}
+</ul>
